@@ -1,0 +1,231 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaudhary Innovations - Enterprise Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#08080a',
+                        cardBg: '#121216',
+                        accentOrange: '#ff5500',
+                        accentGold: '#d4af37'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #08080a;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        /* Custom smooth glowing animations */
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 85, 0, 0.3), inset 0 0 15px rgba(255, 85, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(255, 85, 0, 0.6), inset 0 0 25px rgba(255, 85, 0, 0.4);
+            }
+        }
+        .glow-button {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            /* Added blur effect to make particles appear softly blurred behind text elements */
+            filter: blur(1.5px);
+            opacity: 0.85;
+        }
+        /* Smooth Fade In Transition */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-white">
+
+    <!-- Canvas for Slow Motion Fire Particles Background (Placed right behind content flow) -->
+    <canvas id="fireCanvas"></canvas>
+
+    <!-- Top Right Corner Branding -->
+    <header class="w-full p-6 flex justify-end items-center z-10">
+        <div class="px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 text-xs md:text-sm font-semibold tracking-wider text-zinc-300 shadow-xl flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+            <span>CERTIFIED BY CHAUDHARY</span>
+        </div>
+    </header>
+
+    <!-- Main Central Hero Section -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 z-10 my-auto text-center relative">
+        
+        <!-- Business Tycoon Branding / Title Box with absolute fire canvas inside -->
+        <div class="max-w-3xl w-full p-8 md:p-12 rounded-3xl bg-zinc-950/80 backdrop-blur-xl border border-zinc-800/80 shadow-2xl relative overflow-hidden group">
+            
+            <!-- Canvas for Slow Motion Fire Particles Background (Placed specifically BEHIND the text inside the card) -->
+            <canvas id="fireCanvas"></canvas>
+
+            <!-- Subtle gradient glow behind card elements -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-3 relative z-10">
+                WELCOME
+            </h1>
+            <p class="text-lg md:text-xl font-medium tracking-wide text-orange-500 uppercase mb-2 relative z-10">
+                THE CERTIFIED WEBSITE OF MEHBOOB AHMED
+            </p>
+            <p class="text-sm md:text-base font-normal tracking-wide text-zinc-400 mb-8 relative z-10">
+                A WEBSITE WHERE INNOVATION BEGINS
+            </p>
+
+            <!-- Click to In / Enter Button -->
+            <div class="flex justify-center mb-8 relative z-10">
+                <button id="enterBtn" onclick="handleEnter()" class="glow-button px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold text-lg tracking-wider transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg flex items-center space-x-3">
+                    <span>CLICK TO IN</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+
+            <!-- Terms, Conditions & Usage -->
+            <div class="border-t border-zinc-800/80 pt-6 mt-4 relative z-10">
+                <h4 class="text-xs font-bold tracking-widest text-zinc-400 uppercase mb-2">Terms of Conditions & Usage</h4>
+                <p class="text-xs text-zinc-400 leading-relaxed max-w-xl mx-auto">
+                    By entering this proprietary enterprise portal, you agree to adhere to strict confidentiality, high-tier corporate governance, and professional standards set forth by Chaudhary Enterprises. All data, brand identities, and digital architectures are legally protected and monitored. Unauthorized replication is strictly prohibited.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="w-full p-6 text-center z-10 text-xs text-zinc-600 tracking-wider">
+        &copy; 2026 CHAUDHARY ENTERPRISES. ALL RIGHTS RESERVED.
+    </footer>
+
+    <!-- Interactive Portal Overlay on Click -->
+    <div id="portalOverlay" class="fixed inset-0 bg-zinc-950/90 backdrop-blur-2xl z-50 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-700">
+        <div class="text-center p-8 max-w-lg">
+            <div class="w-16 h-16 bg-orange-600/20 border border-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">ACCESS GRANTED</h2>
+            <p class="text-zinc-400 text-sm mb-6">Welcome to the core network of Mehboob Ahmed. Initializing secure session...</p>
+            <button onclick="handleReset()" class="px-6 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-semibold hover:bg-zinc-800 transition">Return to Portal</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Fire Particle Simulation & Interaction -->
+    <script>
+        const canvas = document.getElementById('fireCanvas');
+        const ctx = canvas.getContext('2d');
+        const cardContainer = canvas.parentElement;
+
+        let width = canvas.width = cardContainer.offsetWidth;
+        let height = canvas.height = cardContainer.offsetHeight;
+
+        // Resize canvas to match card dimensions dynamically
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                width = canvas.width = entry.contentRect.width;
+                height = canvas.height = entry.contentRect.height;
+            }
+        });
+        resizeObserver.observe(cardContainer);
+
+        // Fire particles array
+        const particles = [];
+        const particleCount = 45;
+
+        class FireParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 50;
+                this.size = Math.random() * 2.5 + 1; // Fine microscopic embers
+                this.speedY = Math.random() * 1.0 + 0.3; // Slow motion upwards drift
+                this.speedX = (Math.random() - 0.5) * 0.5; // Slight horizontal sway
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.decay = Math.random() * 0.002 + 0.0008;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX + Math.sin(this.y * 0.03) * 0.3;
+                this.opacity -= this.decay;
+
+                if (this.y < -10 || this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = Math.random() > 0.4 ? '#ff5500' : '#ffaa00';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#ff3300';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new FireParticle());
+        }
+
+        // Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Interaction Handlers
+        function handleEnter() {
+            const overlay = document.getElementById('portalOverlay');
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function handleReset() {
+            const overlay = document.getElementById('portalOverlay');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body>
+</html>
+```
